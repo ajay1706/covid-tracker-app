@@ -54,7 +54,7 @@ class _IndiaPageState extends State<IndiaPage> {
                   ),
 
                   Text(
-                    "COVID tracker in India",
+                    "COVID-19  tracker  in  India",
                     style: Styles.lineStyle,
                   ),
                 ],
@@ -317,7 +317,7 @@ class _IndiaPageState extends State<IndiaPage> {
                          ),
                        ),
                        Container(
-                         height: MediaQuery.of(context).size.height * 0.5,
+                         height: MediaQuery.of(context).size.height * 0.6,
                          child: Center(
                            child: PieChart(
                              dataMap: dataMap,
@@ -427,7 +427,7 @@ class _IndiaPageState extends State<IndiaPage> {
     );
   }
   Future<void> _onrefresh() async {
-    await new Future.delayed(new Duration(seconds: 3));
+    await new Future.delayed(new Duration(seconds: 1));
 
     setState(() {
 

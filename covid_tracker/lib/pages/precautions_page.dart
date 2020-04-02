@@ -18,10 +18,11 @@ class PreventionStepsPage extends StatelessWidget {
       ),
       backgroundColor: Color.fromRGBO(31, 27, 50, 1),
       body: ListView(
+        scrollDirection: Axis.vertical,
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.all(15),
-            height: MediaQuery.of(context).size.height * 0.85,
+            margin: const EdgeInsets.all(10),
+            height: MediaQuery.of(context).size.height -  AppBar().preferredSize.height - MediaQuery.of(context).padding.bottom -MediaQuery.of(context).padding.top -MediaQuery.of(context).padding.right - MediaQuery.of(context).padding.left,
             decoration: BoxDecoration(
 borderRadius: BorderRadius.all(Radius.circular(5)),
               border: Border.all(
@@ -35,13 +36,13 @@ child: Column(
   children: <Widget>[
 
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
       child: Text("Protect yourself and others from the coronavirus (COVID-19)",
    textAlign: TextAlign.center,
       style: Styles.headingStyle,),
     ),
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
       child: Row(
         children: <Widget>[
           Flexible(
@@ -66,24 +67,23 @@ child: Column(
       ),
     ),
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
       child: Row(
         children: <Widget>[
           Flexible(
               flex:2,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
                 child: Row(
                   children: <Widget>[
-                    Icon(FontAwesomeIcons.user,color: Color.fromRGBO(255, 255, 255, 1),size: 15,),
+                    Icon(FontAwesomeIcons.user,color: Color.fromRGBO(255, 255, 255, 1),size: 18,),
                     Icon(FontAwesomeIcons.minus,color: Color.fromRGBO(255, 255, 255, 1),size: 15,),
-
-                    Icon(FontAwesomeIcons.user,color: Color.fromRGBO(255, 255, 255, 1),size: 15,),
+                    Icon(FontAwesomeIcons.user,color: Color.fromRGBO(255, 255, 255, 1),size: 18,),
                   ],
                 ),
               )),
           SizedBox(
-            width: 30,
+            width: 8,
           ),
           Flexible(
             flex: 7,
@@ -98,7 +98,7 @@ child: Column(
       ),
     ),
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
       child: Row(
         children: <Widget>[
           Flexible(
@@ -123,7 +123,7 @@ child: Column(
       ),
     ),
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
       child: Row(
         children: <Widget>[
           Flexible(
@@ -148,7 +148,7 @@ child: Column(
       ),
     ),
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
       child: Row(
         children: <Widget>[
           Flexible(
@@ -173,7 +173,7 @@ child: Column(
       ),
     ),
     Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
       child: Row(
         children: <Widget>[
           Flexible(
@@ -199,7 +199,7 @@ child: Column(
     ),
     Expanded(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal : 8.0, vertical: 4),
         child: Text("Stay Home\n"
             "Stay Safe !",
           textAlign: TextAlign.center,

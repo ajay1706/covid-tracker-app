@@ -51,13 +51,16 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(8),
                   child: Row(
                     mainAxisAlignment:
-                    MainAxisAlignment.spaceEvenly,
+                    MainAxisAlignment.center,
                     children: <Widget>[
                       Icon(FontAwesomeIcons.globe,
                           color: Color.fromRGBO(
                               255, 255, 255, 1)),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Text(
-                        "COVID data all over the globe",
+                        "COVID-19 tracker of the world",
                         style: Styles.lineStyle,
                       ),
                     ],
@@ -421,7 +424,7 @@ class _HomePageState extends State<HomePage> {
 
 
   Future<void> _onrefresh() async {
-    await new Future.delayed(new Duration(seconds: 3));
+    await new Future.delayed(new Duration(seconds: 1));
 
     setState(() {
 
