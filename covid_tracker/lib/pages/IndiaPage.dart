@@ -39,314 +39,523 @@ class _IndiaPageState extends State<IndiaPage> {
       backgroundColor: Color.fromRGBO(31, 27, 50, 1),
       body: RefreshIndicator(
         onRefresh: _onrefresh,
-        child: ListView(
+        child: Stack(
+          fit: StackFit.expand,
           children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: Row(
-                mainAxisAlignment:
-                MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(FontAwesomeIcons.globe,
-                      color: Color.fromRGBO(255, 255, 255, 1)),
-                  SizedBox(
-                    width: 10,
-                  ),
+            ListView(
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  child: Row(
+                    mainAxisAlignment:
+                    MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(FontAwesomeIcons.globe,
+                          color: Color.fromRGBO(255, 255, 255, 1)),
+                      SizedBox(
+                        width: 10,
+                      ),
 
-                  Text(
-                    "COVID-19  tracker  in  India",
-                    style: Styles.lineStyle,
+                      Text(
+                        "COVID-19  tracker  in  India",
+                        style: Styles.lineStyle,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            StreamBuilder<Data>(
-                stream: _dataStream.indiaDataLists,
-                builder: (context, snapshot){
+                ),
+                StreamBuilder<Data>(
+                    stream: _dataStream.indiaDataLists,
+                    builder: (context, snapshot){
 
 //                print("Snapshot data of india ${snapshot.data}");
 
-                  const List<Color> defaultColorList = [
-                    Color.fromRGBO(226, 82, 65, 1),
-                    Color.fromRGBO(103, 172, 91, 1),
-                    Color.fromRGBO(30, 87, 150, 1),
-                    Color.fromRGBO(116, 86, 74, 1),
-                    Color.fromRGBO(43, 103, 92, 1),
-                    Color.fromRGBO(73, 90, 99, 1),
-                  ];
+                      const List<Color> defaultColorList = [
+                        Color.fromRGBO(226, 82, 65, 1),
+                        Color.fromRGBO(103, 172, 91, 1),
+                        Color.fromRGBO(30, 87, 150, 1),
+                        Color.fromRGBO(116, 86, 74, 1),
+                        Color.fromRGBO(43, 103, 92, 1),
+                        Color.fromRGBO(73, 90, 99, 1),
+                      ];
 
 
-                  switch(snapshot.connectionState){
-                    case ConnectionState.none:
-                      {
-                        return   Center(
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: MediaQuery.of(context).size.height - 100 ,
-                            child: FlareActor(
-                              'assets/dotloader.flr',
-                              animation: 'Loading',
-                              fit: BoxFit.none,
-                            ),
-                          ),
-                        );
-                      }
-                      break;
-                    case ConnectionState.waiting:
-                      {
-                        return   Center(
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height -100 ,
+                      switch(snapshot.connectionState){
+                        case ConnectionState.none:
+                          {
+                            return   Center(
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: MediaQuery.of(context).size.height - 100 ,
+                                child: FlareActor(
+                                  'assets/dotloader.flr',
+                                  animation: 'Loading',
+                                  fit: BoxFit.none,
+                                ),
+                              ),
+                            );
+                          }
+                          break;
+                        case ConnectionState.waiting:
+                          {
+                            return   Center(
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height -100 ,
 //                          height: MediaQuery.of(context).size.height * 0.15,
-                            child: FlareActor(
-                              'assets/dotloader.flr',
-                              animation: 'Loading',
-                              fit: BoxFit.none,
-                            ),
-                          ),
-                        );
-                      }
-                      break;
-                    case ConnectionState.active:
-                      {
-                        return   Center(
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: MediaQuery
-                                .of(context)
-                                .size
-                                .height-100 ,
+                                child: FlareActor(
+                                  'assets/dotloader.flr',
+                                  animation: 'Loading',
+                                  fit: BoxFit.none,
+                                ),
+                              ),
+                            );
+                          }
+                          break;
+                        case ConnectionState.active:
+                          {
+                            return   Center(
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height-100 ,
 //                          height: MediaQuery.of(context).size.height * 0.15,
-                            child: FlareActor(
-                              'assets/dotloader.flr',
-                              animation: 'Loading',
-                              fit: BoxFit.none,
-                            ),
-                          ),
-                        );
-                      }
-                      break;
-                    case ConnectionState.done:
-                    {
-                 if(snapshot.hasData){
-                   Map<String, double> dataMap = new Map();
-                   dataMap.putIfAbsent("Total cases",
-                           () => snapshot.data.cases.toDouble() / 100);
-                   dataMap.putIfAbsent("Active cases",
-                           () => snapshot.data.active.toDouble() / 100);
-                   dataMap.putIfAbsent("Total deaths",
-                           () => snapshot.data.deaths.toDouble() / 100);
-                   dataMap.putIfAbsent("Recovered cases",
-                           () => snapshot.data.recovered.toDouble() / 100);
-                   dataMap.putIfAbsent("Today's cases",
-                           () => snapshot.data.todayCases.toDouble() / 100);
-                   dataMap.putIfAbsent("Today's deaths",
-                           () => snapshot.data.todayDeaths.toDouble() / 100);
-                   return    Wrap(
-                     children: <Widget>[
+                                child: FlareActor(
+                                  'assets/dotloader.flr',
+                                  animation: 'Loading',
+                                  fit: BoxFit.none,
+                                ),
+                              ),
+                            );
+                          }
+                          break;
+                        case ConnectionState.done:
+                        {
+                     if(snapshot.hasData){
+                       Map<String, double> dataMap = new Map();
+                       dataMap.putIfAbsent("Total cases",
+                               () => snapshot.data.cases.toDouble() / 100);
+                       dataMap.putIfAbsent("Active cases",
+                               () => snapshot.data.active.toDouble() / 100);
+                       dataMap.putIfAbsent("Total deaths",
+                               () => snapshot.data.deaths.toDouble() / 100);
+                       dataMap.putIfAbsent("Recovered cases",
+                               () => snapshot.data.recovered.toDouble() / 100);
+                       dataMap.putIfAbsent("Today's cases",
+                               () => snapshot.data.todayCases.toDouble() / 100);
+                       dataMap.putIfAbsent("Today's deaths",
+                               () => snapshot.data.todayDeaths.toDouble() / 100);
+                       return    Column(
+                         children: <Widget>[
+                           Wrap(
+                             runSpacing: 10,
 
-                       Container(
-                         width: MediaQuery.of(context).size.width * 0.48,
-                         height: MediaQuery.of(context).size.height * 0.08,
-                         margin: const EdgeInsets.symmetric(
-                             horizontal: 4, vertical: 2),
-                         child: Card(
-                           color: Color.fromRGBO(226, 82, 65, 1),
-                           elevation: 5,
-                           child: Row(
-                             mainAxisAlignment:
-                             MainAxisAlignment.spaceEvenly,
+                             alignment: WrapAlignment.spaceAround,
+                             crossAxisAlignment: WrapCrossAlignment.center,
+                             spacing: 10,
+                             textDirection: TextDirection.ltr,
                              children: <Widget>[
-                               Text(
-                                 "Total cases",
-                                 maxLines: 1,
-                                 style: Styles.activeStyle,
-                               ),
-                               Text(
-                                 "${snapshot.data.cases}",
-                                 style: Styles.numberStyle,
-                                 maxLines: 1,
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
-                       Container(
-                         width: MediaQuery.of(context).size.width * 0.48,
-                         height: MediaQuery.of(context).size.height * 0.08,
 
-                         child: Card(
-                           color: Color.fromRGBO(103, 172, 91, 1),
-                           elevation: 5,
-                           child: Row(
-                             mainAxisAlignment:
-                             MainAxisAlignment.spaceEvenly,
-                             children: <Widget>[
-                               Text(
-                                 "Active cases",
-                                 maxLines: 1,
-                                 style: Styles.activeStyle,
-                               ),
-                               Text(
-                                 "${snapshot.data.active}",
-                                 style: Styles.numberStyle,
-                                 maxLines: 1,
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
+//                               Container(
+//                                 width: MediaQuery.of(context).size.width * 0.48,
+//                                 height: MediaQuery.of(context).size.height * 0.08,
+//                                 margin: const EdgeInsets.symmetric(
+//                                     horizontal: 4, vertical: 2),
+//                                 child: Card(
+//                                   color: Color.fromRGBO(226, 82, 65, 1),
+//                                   elevation: 5,
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                     MainAxisAlignment.spaceEvenly,
+//                                     children: <Widget>[
+//                                       Text(
+//                                         "Total cases",
+//                                         maxLines: 1,
+//                                         style: Styles.activeStyle,
+//                                       ),
+//                                       Text(
+//                                         "${snapshot.data.cases}",
+//                                         style: Styles.numberStyle,
+//                                         maxLines: 1,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+                               Material(
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius
+                                         .circular(10.0)),
+                                 color: Color.fromRGBO(
+                                     226, 82, 65, 1),
 
-                       Container(
-                         width: MediaQuery.of(context).size.width * 0.48,
-                         height: MediaQuery.of(context).size.height * 0.08,
-                         margin: const EdgeInsets.symmetric(
-                             horizontal: 4, vertical: 2),
-                         child: Card(
-                           color: Color.fromRGBO(30, 87, 150, 1),
-                           elevation: 5,
-                           child: Row(
-                             mainAxisAlignment:
-                             MainAxisAlignment.spaceEvenly,
-                             children: <Widget>[
-                               Text(
-                                 "Death cases",
-                                 maxLines: 1,
-                                 style: Styles.activeStyle,
-                               ),
-                               Text(
-                                 "${snapshot.data.deaths}",
-                                 style: Styles.numberStyle,
-                                 maxLines: 1,
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
-                       Container(
-                         width: MediaQuery.of(context).size.width * 0.48,
-                         height: MediaQuery.of(context).size.height * 0.08,
+                                 child: Container(
+                                   padding: const EdgeInsets
+                                       .symmetric(
+                                       horizontal: 8, vertical: 2),
+//
+                                   width: MediaQuery
+                                       .of(context)
+                                       .size
+                                       .width / 2.2,
+                                   child: Row(
+                                     children: <Widget>[
+                                       Flexible(
+                                         child: Text('Total cases ',
+                                             maxLines: 2,
+                                             style: Styles
+                                                 .activeStyle),
+                                       ),
+                                       Flexible(
+                                         child: Text('${snapshot.data
+                                             .cases}',
+                                             style: Styles
+                                                 .numberStyle),
+                                       ),
 
-                         child: Card(
-                           color: Color.fromRGBO(116, 86, 74, 1),
-                           elevation: 5,
-                           child: Row(
-                             mainAxisAlignment:
-                             MainAxisAlignment.spaceAround,
-                             children: <Widget>[
-                               Column(
-                                 mainAxisAlignment:
-                                 MainAxisAlignment.center,
-                                 children: <Widget>[
-                                   Text(
-                                     "Recovered",
-                                     maxLines: 2,
-                                     softWrap: true,
-                                     style: Styles.activeStyle,
+                                     ],
                                    ),
-                                   Text(
-                                     "cases",
-                                     maxLines: 2,
-                                     softWrap: true,
-                                     style: Styles.activeStyle,
-                                   ),
-                                 ],
-                               ),
-                               Text(
-                                 "${snapshot.data.recovered}",
-                                 style: Styles.numberStyle,
-                                 maxLines: 1,
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
-                       Container(
-                         width: MediaQuery.of(context).size.width * 0.48,
-                         height: MediaQuery.of(context).size.height * 0.08,
-                         margin: const EdgeInsets.symmetric(
-                             horizontal: 4, vertical: 2),
-                         child: Card(
-                           color: Color.fromRGBO(43, 103, 92, 1),
-                           elevation: 5,
-                           child: Row(
-                             mainAxisAlignment:
-                             MainAxisAlignment.spaceEvenly,
-                             children: <Widget>[
-                               Text(
-                                 "Today's cases",
-                                 maxLines: 1,
-                                 style: Styles.activeStyle,
-                               ),
-                               Text(
-                                 "${snapshot.data.todayCases}",
-                                 style: Styles.numberStyle,
-                                 maxLines: 1,
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
-                       Container(
-                         width: MediaQuery.of(context).size.width * 0.48,
-                         height: MediaQuery.of(context).size.height * 0.08,
+                                 ),),
+                               Material(
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius
+                                         .circular(10.0)),
+                                 color:Color.fromRGBO(103, 172, 91, 1),
 
-                         child: Card(
-                           color: Color.fromRGBO(73, 90, 99, 1),
-                           elevation: 5,
-                           child: Row(
-                             mainAxisAlignment:
-                             MainAxisAlignment.spaceEvenly,
-                             children: <Widget>[
-                               Text(
-                                 "Today's deaths",
-                                 maxLines: 1,
-                                 style: Styles.activeStyle,
-                               ),
-                               Text(
-                                 "${snapshot.data.todayDeaths}",
-                                 style: Styles.numberStyle,
-                                 maxLines: 1,
-                               ),
-                             ],
-                           ),
-                         ),
-                       ),
-                       Container(
-                         height: MediaQuery.of(context).size.height * 0.6,
-                         child: Center(
-                           child: PieChart(
-                             dataMap: dataMap,
-                             animationDuration:
-                             Duration(milliseconds: 800),
-                             chartLegendSpacing: 32.0,
-                             chartRadius:
-                             MediaQuery.of(context).size.width / 1.5,
-                             showChartValuesInPercentage: true,
-                             showChartValues: true,
-                             showChartValuesOutside: true,
-                             chartValueBackgroundColor: Colors.white,
-                             colorList: defaultColorList,
-                             showLegends: true,
-                             legendStyle:
-                             Styles.activeStyle.copyWith(fontSize: 15),
-                             legendPosition: LegendPosition.bottom,
-                             decimalPlaces: 1,
-                             showChartValueLabel: true,
-                             initialAngle: 0,
-                             chartValueStyle:
-                             defaultChartValueStyle.copyWith(
-                               color:
-                               Colors.blueGrey[900].withOpacity(0.9),
-                             ),
-                             chartType: ChartType.disc,
-                           ),
-                         ),
-                       )
+                                 child: Container(
+                                   padding: const EdgeInsets
+                                       .symmetric(
+                                       horizontal: 8, vertical: 2),
+//
+                                   width: MediaQuery
+                                       .of(context)
+                                       .size
+                                       .width / 2.2,
+                                   child: Row(
+                                     children: <Widget>[
+                                       Flexible(
+                                         child: Text('Active cases ',
+                                             maxLines: 2,
+                                             style: Styles
+                                                 .activeStyle),
+                                       ),
+                                       Flexible(
+                                         child: Text('${snapshot.data
+                                             .active}',
+                                             style: Styles
+                                                 .numberStyle),
+                                       ),
+
+                                     ],
+                                   ),
+                                 ),),
+//                               Container(
+//                                 width: MediaQuery.of(context).size.width * 0.48,
+//                                 height: MediaQuery.of(context).size.height * 0.08,
+//
+//                                 child: Card(
+//                                   color: Color.fromRGBO(103, 172, 91, 1),
+//                                   elevation: 5,
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                     MainAxisAlignment.spaceEvenly,
+//                                     children: <Widget>[
+//                                       Text(
+//                                         "Active cases",
+//                                         maxLines: 1,
+//                                         style: Styles.activeStyle,
+//                                       ),
+//                                       Text(
+//                                         "${snapshot.data.active}",
+//                                         style: Styles.numberStyle,
+//                                         maxLines: 1,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+//
+//                               Container(
+//                                 width: MediaQuery.of(context).size.width * 0.48,
+//                                 height: MediaQuery.of(context).size.height * 0.08,
+//                                 margin: const EdgeInsets.symmetric(
+//                                     horizontal: 4, vertical: 2),
+//                                 child: Card(
+//                                   color: Color.fromRGBO(30, 87, 150, 1),
+//                                   elevation: 5,
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                     MainAxisAlignment.spaceEvenly,
+//                                     children: <Widget>[
+//                                       Text(
+//                                         "Death cases",
+//                                         maxLines: 1,
+//                                         style: Styles.activeStyle,
+//                                       ),
+//                                       Text(
+//                                         "${snapshot.data.deaths}",
+//                                         style: Styles.numberStyle,
+//                                         maxLines: 1,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+                               Material(
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius
+                                         .circular(10.0)),
+                                 color: Color.fromRGBO(30, 87, 150, 1),
+
+                                 child: Container(
+                                   padding: const EdgeInsets
+                                       .symmetric(
+                                       horizontal: 8, vertical: 2),
+//
+                                   width: MediaQuery
+                                       .of(context)
+                                       .size
+                                       .width / 2.2,
+                                   child: Row(
+                                     children: <Widget>[
+                                       Flexible(
+                                         child: Text('Death cases',
+                                             maxLines: 2,
+                                             style: Styles
+                                                 .activeStyle),
+                                       ),
+                                       Flexible(
+                                         child: Text('${snapshot.data
+                                             .deaths}',
+                                             style: Styles
+                                                 .numberStyle),
+                                       ),
+
+                                     ],
+                                   ),
+                                 ),),
+//                               Container(
+//                                 width: MediaQuery.of(context).size.width * 0.48,
+//                                 height: MediaQuery.of(context).size.height * 0.08,
+//
+//                                 child: Card(
+//                                   color: Color.fromRGBO(116, 86, 74, 1),
+//                                   elevation: 5,
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                     MainAxisAlignment.spaceAround,
+//                                     children: <Widget>[
+//                                       Column(
+//                                         mainAxisAlignment:
+//                                         MainAxisAlignment.center,
+//                                         children: <Widget>[
+//                                           Text(
+//                                             "Recovered",
+//                                             maxLines: 2,
+//                                             softWrap: true,
+//                                             style: Styles.activeStyle,
+//                                           ),
+//                                           Text(
+//                                             "cases",
+//                                             maxLines: 2,
+//                                             softWrap: true,
+//                                             style: Styles.activeStyle,
+//                                           ),
+//                                         ],
+//                                       ),
+//                                       Text(
+//                                         "${snapshot.data.recovered}",
+//                                         style: Styles.numberStyle,
+//                                         maxLines: 1,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+                               Material(
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius
+                                         .circular(10.0)),
+                                 color: Color.fromRGBO(116, 86, 74, 1),
+
+                                 child: Container(
+                                   padding: const EdgeInsets
+                                       .symmetric(
+                                       horizontal: 8, vertical: 2),
+//
+                                   width: MediaQuery
+                                       .of(context)
+                                       .size
+                                       .width / 2.2,
+                                   child: Row(
+                                     children: <Widget>[
+                                       Flexible(
+                                         child: Text('Cured cases ',
+                                             maxLines: 2,
+                                             style: Styles
+                                                 .activeStyle),
+                                       ),
+                                       Flexible(
+                                         child: Text('${snapshot.data
+                                             .recovered}',
+                                             style: Styles
+                                                 .numberStyle),
+                                       ),
+
+                                     ],
+                                   ),
+                                 ),),
+                               Material(
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius
+                                         .circular(10.0)),
+                                 color: Color.fromRGBO(43, 103, 92, 1),
+
+                                 child: Container(
+                                   padding: const EdgeInsets
+                                       .symmetric(
+                                       horizontal: 8, vertical: 2),
+//
+                                   width: MediaQuery
+                                       .of(context)
+                                       .size
+                                       .width / 2.2,
+                                   child: Row(
+                                     children: <Widget>[
+                                       Flexible(
+                                         child: Text("Today's cases ",
+                                             maxLines: 2,
+                                             style: Styles
+                                                 .activeStyle),
+                                       ),
+                                       Flexible(
+                                         child: Text('${snapshot.data
+                                             .recovered}',
+                                             style: Styles
+                                                 .numberStyle),
+                                       ),
+
+                                     ],
+                                   ),
+                                 ),),
+                               Material(
+                                 shape: RoundedRectangleBorder(
+                                     borderRadius: BorderRadius
+                                         .circular(10.0)),
+                                 color:Color.fromRGBO(73, 90, 99, 1),
+
+                                 child: Container(
+                                   padding: const EdgeInsets
+                                       .symmetric(
+                                       horizontal: 8, vertical: 2),
+//
+                                   width: MediaQuery
+                                       .of(context)
+                                       .size
+                                       .width / 2.2,
+                                   child: Row(
+                                     children: <Widget>[
+                                       Flexible(
+                                         child: Text("Today's cases ",
+                                             maxLines: 2,
+                                             style: Styles
+                                                 .activeStyle),
+                                       ),
+                                       Flexible(
+                                         child: Text('${snapshot.data
+                                             .todayDeaths}',
+                                             style: Styles
+                                                 .numberStyle),
+                                       ),
+
+                                     ],
+                                   ),
+                                 ),),
+//                               Container(
+//                                 width: MediaQuery.of(context).size.width * 0.48,
+//                                 height: MediaQuery.of(context).size.height * 0.08,
+//                                 margin: const EdgeInsets.symmetric(
+//                                     horizontal: 4, vertical: 2),
+//                                 child: Card(
+//                                   color: Color.fromRGBO(43, 103, 92, 1),
+//                                   elevation: 5,
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                     MainAxisAlignment.spaceEvenly,
+//                                     children: <Widget>[
+//                                       Text(
+//                                         "Today's cases",
+//                                         maxLines: 1,
+//                                         style: Styles.activeStyle,
+//                                       ),
+//                                       Text(
+//                                         "${snapshot.data.todayCases}",
+//                                         style: Styles.numberStyle,
+//                                         maxLines: 1,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+//                               Container(
+//                                 width: MediaQuery.of(context).size.width * 0.48,
+//                                 height: MediaQuery.of(context).size.height * 0.08,
+//
+//                                 child: Card(
+//                                   color: Color.fromRGBO(73, 90, 99, 1),
+//                                   elevation: 5,
+//                                   child: Row(
+//                                     mainAxisAlignment:
+//                                     MainAxisAlignment.spaceEvenly,
+//                                     children: <Widget>[
+//                                       Text(
+//                                         "Today's deaths",
+//                                         maxLines: 1,
+//                                         style: Styles.activeStyle,
+//                                       ),
+//                                       Text(
+//                                         "${snapshot.data.todayDeaths}",
+//                                         style: Styles.numberStyle,
+//                                         maxLines: 1,
+//                                       ),
+//                                     ],
+//                                   ),
+//                                 ),
+//                               ),
+                               Container(
+                                 child: Center(
+                                   child: PieChart(
+                                     dataMap: dataMap,
+                                     animationDuration:
+                                     Duration(milliseconds: 800),
+                                     chartLegendSpacing: 32.0,
+                                     chartRadius:
+                                     MediaQuery.of(context).size.width / 1.5,
+                                     showChartValuesInPercentage: true,
+                                     showChartValues: true,
+                                     showChartValuesOutside: true,
+                                     chartValueBackgroundColor: Colors.white,
+                                     colorList: defaultColorList,
+                                     showLegends: true,
+                                     legendStyle:
+                                     Styles.activeStyle.copyWith(fontSize: 15),
+                                     legendPosition: LegendPosition.bottom,
+                                     decimalPlaces: 1,
+                                     showChartValueLabel: true,
+                                     initialAngle: 0,
+                                     chartValueStyle:
+                                     defaultChartValueStyle.copyWith(
+                                       color:
+                                       Colors.blueGrey[900].withOpacity(0.9),
+                                     ),
+                                     chartType: ChartType.disc,
+                                   ),
+                                 ),
+                               )
 
 //                            Center(
 //                              child: FutureBuilder<Data>(
@@ -388,33 +597,37 @@ class _IndiaPageState extends State<IndiaPage> {
 //                                    print(snapshot.data.cases);
 //                                  }),
 //                            )
-                     ],
-                   );
-                 }
-                 else{
-                   return  Center(
-                     child:Container(
-                       alignment: Alignment.center,
-                       height: MediaQuery.of(context).size.height-100 ,
-                       child: Column(
-                         mainAxisAlignment: MainAxisAlignment.center,
-                         crossAxisAlignment: CrossAxisAlignment.center,
-                         children: <Widget>[
-                           Icon(Icons.signal_wifi_off,size: 60,color: Colors.white,),
-                           Text("Check your Internet Connection",
-                             softWrap: true,
-                             maxLines: 2,
-                             style: Styles.lineStyle,)
+                             ],
+                           ),
                          ],
-                       ),
-                     ) ,
-                   );;
-                 }
-                    }
-                      break;
-                  }
+                       );
+                     }
+                     else{
+                       return  Center(
+                         child:Container(
+                           alignment: Alignment.center,
+                           height: MediaQuery.of(context).size.height-100 ,
+                           child: Column(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             crossAxisAlignment: CrossAxisAlignment.center,
+                             children: <Widget>[
+                               Icon(Icons.signal_wifi_off,size: 60,color: Colors.white,),
+                               Text("Check your Internet Connection",
+                                 softWrap: true,
+                                 maxLines: 2,
+                                 style: Styles.lineStyle,)
+                             ],
+                           ),
+                         ) ,
+                       );;
+                     }
+                        }
+                          break;
+                      }
 
-                })
+                    })
+              ],
+            ),
           ],
         ),
       ),
@@ -427,7 +640,6 @@ class _IndiaPageState extends State<IndiaPage> {
     );
   }
   Future<void> _onrefresh() async {
-    await new Future.delayed(new Duration(seconds: 1));
 
     setState(() {
 
