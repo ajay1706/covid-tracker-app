@@ -27,8 +27,7 @@ class ApiProvider {
   static String indiaUrl = "https://corona.lmao.ninja/countries/India";
  static  Future<Data> fetchIndiaData() async {
     final response = await http.get(indiaUrl);
-
-      // If the call to the server was successful, parse the JSON.
+    // If the call to the server was successful, parse the JSON.
       print(
           "data from thw world is ${Data.fromJson(json.decode(response.body))}");
       return Data.fromJson(json.decode(response.body));

@@ -136,9 +136,11 @@ class _IndiaPageState extends State<IndiaPage> {
                         case ConnectionState.done:
                         {
                      if(snapshot.hasData){
+
+                       print("${snapshot.data.cases} are the total cases");
                        Map<String, double> dataMap = new Map();
                        dataMap.putIfAbsent("Total cases",
-                               () => snapshot.data.cases.toDouble() / 100);
+                               () => snapshot.data.cases / 100);
                        dataMap.putIfAbsent("Active cases",
                                () => snapshot.data.active.toDouble() / 100);
                        dataMap.putIfAbsent("Total deaths",
@@ -212,7 +214,7 @@ class _IndiaPageState extends State<IndiaPage> {
                                        ),
                                        Flexible(
                                          child: Text('${snapshot.data
-                                             .cases}',
+                                             .cases.toString()}',
                                              style: Styles
                                                  .numberStyle),
                                        ),
